@@ -4,37 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlexBrowser</title>
-    <!-- Подключаем манифест и неоновые киберпанк стили -->
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- 6) Системная инфо-панель сверху -->
+    <!-- Инфо-панель сверху -->
     <div class="system-bar">
         <span id="browser-mode">🌐 РЕЖИМ: СТАНДАРТ</span>
         <span id="live-speed">⚡ СКОРОСТЬ: 48.5 Mbps</span>
         <span id="live-time">00:00:00</span>
     </div>
 
-    <!-- 3) Верхняя панель Закладок с крестиками -->
+    <!-- Верхняя панель Закладок с крестиками -->
     <div class="control-panel">
         <div class="bookmarks-bar" id="bookmarksContainer"></div>
     </div>
 
     <!-- Главная рабочая зона -->
     <div class="search-zone" id="mainZone">
-        <div class="logo">ALEX BROWSER</div>
+        <div class="logo">AlexBrowser</div>
         
-        <!-- 4) Поиск посередине -->
         <div class="search-container">
-            <input type="text" id="searchField" class="neon-input" placeholder="Введите глобальный запрос...">
-            <br>
-            <button class="neon-btn" onclick="executeSearch()">КИБЕР ПОИСК</button>
+            <!-- ОЧИЩЕННАЯ РАБОЧАЯ ФОРМА ПОИСКА ПО ВСЕМУ ИНТЕРНЕТУ -->
+            <form method="get" action="https://duckduckgo.com/" target="_blank">
+                <input type="text" name="q" class="neon-input" placeholder="Поиск в AlexBrowser..." required>
+                <br>
+                <button type="submit" class="neon-btn">КИБЕР ПОИСК</button>
+            </form>
         </div>
 
-        <!-- 4) Выдача сайтов в 2 ряда -->
-        <div class="results-grid" id="resultsGrid">
+        <!-- Выдача сайтов в 2 ряда -->
+        <div class="results-grid" id="resultsGrid" style="display: grid;">
             <div class="grid-card"><h3>Госуслуги РФ</h3><p>Государственный портал</p><button class="neon-btn" onclick="openWebSite('https://gosuslugi.ru')">Открыть</button></div>
             <div class="grid-card"><h3>ВКонтакте</h3><p>Социальная сеть</p><button class="neon-btn" onclick="openWebSite('https://vk.com')">Открыть</button></div>
             <div class="grid-card"><h3>Яндекс Поиск</h3><p>Информационный хаб</p><button class="neon-btn" onclick="openWebSite('https://ya.ru')">Открыть</button></div>
@@ -42,7 +43,7 @@
         </div>
     </div>
 
-    <!-- Фрейм отображения сайтов (Ваша магия кода от Google вставляется внутрь функции поиска) -->
+    <!-- Фрейм отображения сайтов -->
     <iframe id="appViewport" class="view-frame"></iframe>
 
     <!-- НИЖНЯЯ ПАНЕЛЬ НАВИГАЦИИ -->
@@ -54,7 +55,7 @@
         <button class="nav-btn" onclick="openModal('settingsModal')">⚙️ НАСТРОЙКИ</button>
     </div>
 
-    <!-- ОКНО НАСТРОЕК И РЕГИСТРАЦИИ -->
+    <!-- ОКНО НАСТРОЕК -->
     <div class="modal" id="settingsModal">
         <div class="modal-header"><h3>СИСТЕМА / РЕГИСТРАЦИЯ</h3><span class="close-modal" onclick="closeModal('settingsModal')">[X]</span></div>
         <div class="form-group"><label>Имя пользователя:</label><input type="text" id="regName"></div>
@@ -66,7 +67,7 @@
         </div>
     </div>
 
-    <!-- ПРОВОДНИК И LOCALHOST -->
+    <!-- ПРОВОДНИК -->
     <div class="modal" id="fileModal">
         <div class="modal-header"><h3>МЕНЕДЖЕР ФАЙЛОВ / LOCALHOST</h3><span class="close-modal" onclick="closeModal('fileModal')">[X]</span></div>
         <input type="file" id="htmlOpener" accept=".html" class="neon-btn" style="width:100%; margin-bottom:15px;" onchange="readLocalHTML(event)">
@@ -84,7 +85,6 @@
         <button class="neon-btn" style="margin-top:10px;" onclick="saveNote()">СОХРАНИТЬ ЗАМЕТКУ</button>
     </div>
 
-    <!-- Подключаем всю логику на JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
