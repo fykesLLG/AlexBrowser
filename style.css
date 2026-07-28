@@ -1,0 +1,193 @@
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Courier New', monospace; 
+}
+body { 
+    background: #0a0a0c; 
+    color: #00f0ff; 
+    height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden; 
+}
+
+/* Верхняя инфо-панель */
+.system-bar { 
+    background: #121216; 
+    padding: 4px 10px; 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 12px; 
+    border-bottom: 1px solid #ff0055; 
+    text-shadow: 0 0 5px #ff0055; 
+}
+
+/* Закладки сверху */
+.control-panel { 
+    background: #14141c; 
+    padding: 10px; 
+    border-bottom: 2px solid #00f0ff; 
+}
+.bookmarks-bar { 
+    display: flex; 
+    gap: 8px; 
+    overflow-x: auto; 
+    padding-bottom: 8px; 
+}
+.bookmark-item { 
+    background: #1b1b26; 
+    border: 1px solid #ff0055; 
+    padding: 4px 8px; 
+    border-radius: 4px; 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+    box-shadow: 0 0 8px rgba(255, 0, 85, 0.3); 
+}
+.bookmark-link { 
+    color: #00f0ff; 
+    text-decoration: none; 
+    font-size: 13px; 
+    cursor: pointer; 
+}
+.del-bookmark { 
+    color: #ff0055; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
+
+/* Центр поиска */
+.search-zone { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px; 
+    position: relative; 
+}
+.search-container { 
+    width: 100%; 
+    max-width: 600px; 
+    text-align: center; 
+}
+.logo { 
+    font-size: 42px; 
+    font-weight: bold; 
+    margin-bottom: 20px; 
+    text-shadow: 0 0 15px #00f0ff, 0 0 30px #ff0055; 
+    color: #fff; 
+}
+
+/* Неоновые элементы ввода */
+.neon-input { 
+    width: 80%; 
+    padding: 12px; 
+    background: #12121a; 
+    border: 2px solid #00f0ff; 
+    color: #fff; 
+    border-radius: 5px; 
+    outline: none; 
+    box-shadow: 0 0 15px #00f0ff; 
+    font-size: 16px; 
+    margin-bottom: 10px; 
+}
+.neon-btn { 
+    padding: 12px 24px; 
+    background: transparent; 
+    border: 2px solid #ff0055; 
+    color: #ff0055; 
+    font-weight: bold; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    box-shadow: 0 0 15px #ff0055; 
+    transition: 0.3s; 
+}
+.neon-btn:hover { 
+    background: #ff0055; 
+    color: #fff; 
+}
+
+/* Сетка сайтов в 2 ряда */
+.results-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px; 
+    width: 100%; 
+    max-width: 800px; 
+    margin-top: 20px; 
+    display: none; 
+}
+.grid-card { 
+    background: #111118; 
+    border: 1px solid #00f0ff; 
+    padding: 15px; 
+    border-radius: 6px; 
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); 
+}
+
+/* Нижняя панель */
+.bottom-nav { 
+    background: #121216; 
+    display: flex; 
+    justify-content: space-around; 
+    padding: 10px; 
+    border-top: 1px solid #ff0055; 
+}
+.nav-btn { 
+    background: transparent; 
+    border: none; 
+    color: #00f0ff; 
+    cursor: pointer; 
+    font-size: 14px; 
+    text-shadow: 0 0 5px #00f0ff; 
+}
+
+/* Окна (Настройки, Проводник) */
+.modal { 
+    position: fixed; 
+    top: 10%; 
+    left: 5%; 
+    width: 90%; 
+    height: 75%; 
+    background: #0d0d13; 
+    border: 2px solid #ff0055; 
+    box-shadow: 0 0 25px #ff0055; 
+    border-radius: 8px; 
+    display: none; 
+    flex-direction: column; 
+    z-index: 100; 
+    padding: 15px; 
+}
+.modal-header { 
+    display: flex; 
+    justify-content: space-between; 
+    border-bottom: 1px solid #00f0ff; 
+    padding-bottom: 8px; 
+    margin-bottom: 15px; 
+}
+.close-modal { 
+    color: #ff0055; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
+.form-group { 
+    margin-bottom: 12px; 
+}
+.form-group input { 
+    width: 100%; 
+    padding: 8px; 
+    background: #1a1a24; 
+    border: 1px solid #00f0ff; 
+    color: #fff; 
+    outline: none; 
+}
+.view-frame { 
+    width: 100%; 
+    height: 100%; 
+    border: none; 
+    background: white; 
+    display: none; 
+}
