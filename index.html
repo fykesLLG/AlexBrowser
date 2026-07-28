@@ -9,81 +9,48 @@
 </head>
 <body>
 
-    <!-- Инфо-панель сверху -->
+    <!-- Верхняя инфо-панель -->
     <div class="system-bar">
-        <span id="browser-mode">🌐 РЕЖИМ: СТАНДАРТ</span>
-        <span id="live-speed">⚡ СКОРОСТЬ: 48.5 Mbps</span>
+        <span id="browser-mode">🌐 AlexBrowser v1.0</span>
         <span id="live-time">00:00:00</span>
     </div>
 
-    <!-- Верхняя панель Закладок с крестиками -->
+    <!-- Панель закладок, управляемая базой телефона -->
     <div class="control-panel">
         <div class="bookmarks-bar" id="bookmarksContainer"></div>
     </div>
 
-    <!-- Главная рабочая зона -->
+    <!-- Главный экран -->
     <div class="search-zone" id="mainZone">
         <div class="logo">AlexBrowser</div>
         
         <div class="search-container">
-            <!-- ОЧИЩЕННАЯ РАБОЧАЯ ФОРМА ПОИСКА ПО ВСЕМУ ИНТЕРНЕТУ -->
-            <form method="get" action="https://duckduckgo.com/" target="_blank">
-                <input type="text" name="q" class="neon-input" placeholder="Поиск в AlexBrowser..." required>
+            <!-- 100% РАБОЧАЯ ФОРМА ВНУТРЕННЕГО ПОИСКА -->
+            <form method="get" action="https://bing.com" target="appViewport" onsubmit="handleSearchSubmit()">
+                <input type="text" name="q" id="searchField" class="neon-input" placeholder="Поиск в интернете..." required>
                 <br>
-                <button type="submit" class="neon-btn">КИБЕР ПОИСК</button>
+                <button type="submit" class="neon-btn">НАЙТИ</button>
             </form>
         </div>
 
-        <!-- Выдача сайтов в 2 ряда -->
-        <div class="results-grid" id="resultsGrid" style="display: grid;">
-            <div class="grid-card"><h3>Госуслуги РФ</h3><p>Государственный портал</p><button class="neon-btn" onclick="openWebSite('https://gosuslugi.ru')">Открыть</button></div>
-            <div class="grid-card"><h3>ВКонтакте</h3><p>Социальная сеть</p><button class="neon-btn" onclick="openWebSite('https://vk.com')">Открыть</button></div>
-            <div class="grid-card"><h3>Яндекс Поиск</h3><p>Информационный хаб</p><button class="neon-btn" onclick="openWebSite('https://ya.ru')">Открыть</button></div>
-            <div class="grid-card"><h3>YouTube</h3><p>Видеоплатформа</p><button class="neon-btn" onclick="openWebSite('https://youtube.com')">Открыть</button></div>
+        <!-- Быстрые плитки -->
+        <div class="results-grid">
+            <div class="grid-card">
+                <h3>Госуслуги</h3>
+                <button class="neon-btn" onclick="openWebSite('https://gosuslugi.ru')">Открыть</button>
+            </div>
+            <div class="grid-card">
+                <h3>ВКонтакте</h3>
+                <button class="neon-btn" onclick="openWebSite('https://vk.com')">Открыть</button>
+            </div>
         </div>
     </div>
 
-    <!-- Фрейм отображения сайтов -->
-    <iframe id="appViewport" class="view-frame"></iframe>
+    <!-- Кнопка «Назад на главную», которая появится при просмотре сайтов -->
+    <button id="backHomeBtn" class="neon-btn back-btn" onclick="goHome()">🏠 НА ГЛАВНУЮ</button>
 
-    <!-- НИЖНЯЯ ПАНЕЛЬ НАВИГАЦИИ -->
-    <div class="bottom-nav">
-        <button class="nav-btn" onclick="toggleIncognito()">🕶️ ИНКОГНИТО</button>
-        <button class="nav-btn" onclick="openModal('fileModal')">📂 ПРОВОДНИК</button>
-        <button class="nav-btn" onclick="openModal('notesModal')">📝 ЗАМЕТКИ</button>
-        <button class="nav-btn" onclick="toggleFullscreen()">📺 ЭКРАН</button>
-        <button class="nav-btn" onclick="openModal('settingsModal')">⚙️ НАСТРОЙКИ</button>
-    </div>
-
-    <!-- ОКНО НАСТРОЕК -->
-    <div class="modal" id="settingsModal">
-        <div class="modal-header"><h3>СИСТЕМА / РЕГИСТРАЦИЯ</h3><span class="close-modal" onclick="closeModal('settingsModal')">[X]</span></div>
-        <div class="form-group"><label>Имя пользователя:</label><input type="text" id="regName"></div>
-        <div class="form-group"><label>Пароль:</label><input type="password" id="regPass"></div>
-        <div class="form-group"><label>Повторите пароль:</label><input type="password" id="regPass2"></div>
-        <button class="neon-btn" onclick="saveUser()">ЗАРЕГИСТРИРОВАТЬСЯ</button>
-        <div style="margin-top:20px;">
-            <button class="neon-btn" style="border-color:#00f0ff; color:#00f0ff;" onclick="requestDefaultBrowser()">Сделать браузером по умолчанию</button>
-        </div>
-    </div>
-
-    <!-- ПРОВОДНИК -->
-    <div class="modal" id="fileModal">
-        <div class="modal-header"><h3>МЕНЕДЖЕР ФАЙЛОВ / LOCALHOST</h3><span class="close-modal" onclick="closeModal('fileModal')">[X]</span></div>
-        <input type="file" id="htmlOpener" accept=".html" class="neon-btn" style="width:100%; margin-bottom:15px;" onchange="readLocalHTML(event)">
-        <div id="localhostViewer" style="flex:1; background:#fff; color:#000; padding:10px; overflow-y:auto; border-radius:4px; display:none;"></div>
-        <div id="downloadContainer" style="margin-top:15px;">
-            <h4>📥 Менеджер загрузок:</h4>
-            <p style="font-size:12px; color:#aaa;">Все файлы загружаются во внутреннее ядро</p>
-        </div>
-    </div>
-
-    <!-- ЗАМЕТКИ -->
-    <div class="modal" id="notesModal">
-        <div class="modal-header"><h3>БОРТОВОЙ ЖУРНАЛ / ЗАМЕТКИ</h3><span class="close-modal" onclick="closeModal('notesModal')">[X]</span></div>
-        <textarea id="noteArea" style="width:100%; height:60%; background:#14141c; color:#00f0ff; border:1px solid #00f0ff; padding:10px; outline:none;"></textarea>
-        <button class="neon-btn" style="margin-top:10px;" onclick="saveNote()">СОХРАНИТЬ ЗАМЕТКУ</button>
-    </div>
+    <!-- Внутреннее окно для отображения сайтов без вылета из приложения -->
+    <iframe id="appViewport" name="appViewport" class="view-frame"></iframe>
 
     <script src="script.js"></script>
 </body>
